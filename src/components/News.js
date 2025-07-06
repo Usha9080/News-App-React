@@ -323,7 +323,7 @@ export class News extends Component {
       this.props.country
     }&category=${
       this.props.category
-    }&apiKey=bdd57a44dd8a4cfa8391761ffb44488c&page=${
+    }&apiKey=${this.props.apiKey}&page=${
       this.state.page - 1
     }&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
@@ -396,7 +396,7 @@ export class News extends Component {
       this.props.country
     }&category=${
       this.props.category
-    }&apiKey=bdd57a44dd8a4cfa8391761ffb44488c&page=${
+    }&apiKey=${this.props.apiKey}&page=${
       this.state.page - 1
     }&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
@@ -404,7 +404,7 @@ export class News extends Component {
     console.log(paresedDta);
 
     this.setState({
-      article: this.state.article.concat(paresedDta.articles),
+      article: this.state.article?.concat(paresedDta.articles),
       loading: false,
       totalResult: paresedDta.totalResult,
     });
@@ -449,9 +449,9 @@ export class News extends Component {
          <div className="container"> 
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 px-3">
               {!this.state.loading &&
-                this.state?.article?.map((element) => {
+                this.state?.article?.map((element,index) => {
                   return (
-                    <div className="col-md-3" key={element.url}>
+                    <div className="col-md-3" key={element.url + index}>
                       <Newsitems
                         title={element?.title}
                         source={element?.source.name}
